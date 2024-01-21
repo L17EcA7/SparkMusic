@@ -2,7 +2,8 @@ name: Build SparkMusic
 
 on:
   schedule:
-  - cron: "0 * * * 1-7"
+    - cron: "0 0 * * *" 
+  
 
 jobs:
   release:
