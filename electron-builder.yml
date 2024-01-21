@@ -34,8 +34,10 @@ linux:
     - AppImage
     - snap
     - deb
-  maintainer: electronjs.org
-  category: Utility
+    - apk
+  maintainer: LiteCat.BUZZ
+  category: Audio
+  icon: './build/icons-spark/1024x1024.png'
 appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
