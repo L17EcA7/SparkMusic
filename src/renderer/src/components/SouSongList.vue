@@ -26,7 +26,7 @@ import { ref, onBeforeUnmount } from "vue";
 import {
     useMessage
 } from "naive-ui";
-import APlayer from 'APlayer';
+import APlayer from 'aplayer';
 import { extractIdFromUrl, GetAudioList, getPlaylistInfo } from '../js/music';
 import { DownloadMusic } from '../js/downloader';
 const model = ref({

@@ -90,7 +90,7 @@ import { ref, onBeforeUnmount } from "vue";
 import {
     useMessage
 } from "naive-ui";
-import APlayer from 'APlayer';
+import APlayer from 'aplayer';
 import { extractIdFromUrl, getMusicInfo } from '../js/music';
 var ap = null
 var audio = ref(null)
