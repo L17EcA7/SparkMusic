@@ -1,9 +1,8 @@
 name: Build SparkMusic
 
 on:
-  push:
-    tags:
-      - v*.*.*
+  schedule:
+  - cron: "0 2 * * 1-5"
 
 jobs:
   release:
