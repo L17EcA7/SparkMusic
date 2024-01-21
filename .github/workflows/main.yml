@@ -14,33 +14,31 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
 
     steps:
-      - name: Check out Git repository
+      - name: 检查Git仓库
         uses: actions/checkout@v3
 
-      - name: Install Node.js
+      - name: 安装 Node.js
         uses: actions/setup-node@v3
         with:
           node-version: 16
 
-      - name: Install Dependencies
+      - name: 安装依赖
         run: npm install
 
-      - name: build-linux
+      - name: 打包Linux版本
         if: matrix.os == 'ubuntu-latest'
         run: npm run build:linux
 
-      - name: build-mac
+      - name: 打包MacOS版本
         if: matrix.os == 'macos-latest'
         run: npm run build:mac
 
-      - name: build-win
+      - name: 打包Windows版本
         if: matrix.os == 'windows-latest'
         run: npm run build:win
         
-      - name: Download a Build Artifact
-        uses: actions/download-artifact@v4.1.1
+      - name: 上传工件
+        uses: actions/upload-artifact@v2
         with:
-          # Name of the artifact to download. If unspecified, all artifacts for the run are downloaded.
-          name: # SparkMusic
-          # Destination path. Supports basic tilde expansion. Defaults to $GITHUB_WORKSPACE
-          path: /dist
+          name: SparkMusic Artifact
+          path: dist/*
