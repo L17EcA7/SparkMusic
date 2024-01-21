@@ -14,7 +14,7 @@
     "postinstall": "electron-builder install-app-deps",
     "build:win": "npm run build && electron-builder --win --config",
     "build:mac": "npm run build && electron-builder --mac --config",
-    "build:linux": "npm run build && electron-builder --linux --config",
+    "build:linux": "npm run build && electron-builder --linux --config --publish never",
     "electron:generate-icons": "electron-icon-builder --input=./resources/icon/icon-spark.png --output=build/icon-spark --flatten"
   },
   "dependencies": {
