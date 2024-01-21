@@ -68,7 +68,7 @@
       "icon": "./build/icons/icon.ico"
     },
     "linux": {
-      "icon": "./build/icons/icon.ico"
+      "icon": "./build/icons-spark/1024x1024.png"
     },
     "nsis": {
       "oneClick": false,
