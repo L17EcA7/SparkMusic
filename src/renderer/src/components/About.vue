@@ -29,11 +29,10 @@
                 <template #description>
                     <n-space size="small" style="margin-top: 4px">
                         <n-tag :bordered="false" type="info" size="small">
-                            版本 0.1.0
+                            版本 0.1.1
                         </n-tag>
                     </n-space>
                 </template>
-                这是一个测试版本，一切功能均不完整，<br>
                 反馈问题/提供建议请发邮件到：LiTTTTT87@hotmail.com
             </n-thing>
         </n-list-item>
