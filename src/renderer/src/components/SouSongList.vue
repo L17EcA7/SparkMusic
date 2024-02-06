@@ -1,9 +1,11 @@
 <template>
-    <n-alert title="歌单获取功能为测试功能，可能会获取失败" type="info">
-        </n-alert><br>
+    <n-alert title="歌单获取可能会出现无版权歌曲，这些歌曲将被跳过" type="warning">
+    </n-alert>
+    <br>
     <n-form ref="formRef" :model="model" :rules="rules">
         <n-form-item path="link" label="网易云歌单链接">
-            <n-input v-model:value="model.link" size="large" />
+            <n-auto-complete v-model:value="model.link" size="large" :options="options" placeholder="输入歌单 ID"
+                :render-label="renderLabel" />
         </n-form-item>
         <n-row :gutter="[0, 24]">
             <n-col :span="24">
@@ -16,7 +18,7 @@
             </n-col>
         </n-row>
     </n-form>
-    <div id="aplayer">
+    <div id="aplayer_SongList">
 
     </div>
 </template>
@@ -28,7 +30,7 @@ import {
 } from "naive-ui";
 import APlayer from 'aplayer';
 import { extractIdFromUrl, GetAudioList, getPlaylistInfo } from '../js/music';
-import { DownloadMusic } from '../js/downloader';
+import { getSonglistHistory, saveSonglistHistory } from '../js/history';
 const model = ref({
     link: null
 });
@@ -46,7 +48,7 @@ const rules = {
 
                 const isValidLink = (link) => {
                     try {
-                        const url = new URL(link);
+                        const url = new URL(link.replace("/#/", '/'));
 
                         // 第一步：确认是不是链接
                         if (!url || !url.protocol || !url.host) {
@@ -59,7 +61,7 @@ const rules = {
                         }
 
                         // 第三步：检查路径是否为 /playlist
-                        if (url.pathname.replace("/#", "") !== '/playlist') {
+                        if (url.pathname !== '/playlist') {
                             return false;
                         }
 
@@ -90,22 +92,24 @@ async function handleValidateButtonClick(e) {
     formRef.value?.validate(async (errors) => {
         if (!errors) {
             loading.value = true;
-            message.loading("已经开始获取歌单，等待耐心几分钟，如果失败了会有提示。");
+            const mes = message.loading("已经开始获取歌单，等待耐心几分钟，如果失败了会有提示。");
             const id = extractIdFromUrl(model.value.link);
 
             try {
                 const MusicList = await getPlaylistInfo(id);
+                console.log(MusicList);
                 if (ap != null) {
                     ap.pause();
                 }
-
+                mes.destroy()
                 // 等待 GetAudioList 函数执行完毕
                 const { result, successCount, failureCount } = await GetAudioList(MusicList);
-                message.info("正在检验歌单···");
+                const mes2 = message.info("正在检验歌单···");
                 const filteredResult = result.filter(songInfo => songInfo !== undefined);
                 console.log(result, successCount, failureCount);
+                mes2.destroy()
                 ap = new APlayer({
-                    container: document.getElementById('aplayer'),
+                    container: document.getElementById('aplayer_SongList'),
                     theme: "#FFC64B",
                     lrcType: 3,
                     autoplay: true,
@@ -113,6 +117,7 @@ async function handleValidateButtonClick(e) {
                     audio: filteredResult
                 });
                 message.success(`获取成功:${successCount} 首，失败:${failureCount} 首`);
+                saveSonglistHistory(id, successCount + failureCount)
                 loading.value = false;
             } catch (error) {
                 console.error('获取音频列表失败:', error);
@@ -127,7 +132,49 @@ async function handleValidateButtonClick(e) {
 
 const a = onBeforeUnmount(() => {
     if (ap != null) {
-        ap.destroy()
+        ap.pause()
     }
 })
+import { computed } from "vue";
+import { NTag } from "naive-ui";
+
+const renderLabel = (option) => {
+    let tagType = option.count > 0 ? 'warning' : 'info';
+    let tagContent = option.count > 0 ? `历史记录 | ${option.count}首` : '🧐猜你想搜';
+
+    return [
+        h(NTag, { size: "small", type: tagType }, { default: () => tagContent }),
+        " ",
+        option.value
+    ];
+};
+
+const options = computed(() => {
+    const list = getSonglistHistory();
+    const isNumeric = /^\d+$/.test(model.value.link);
+
+    if (model.value.link && isNumeric) {
+        return [
+            {
+                id: 0,
+                count: 0,
+                value: `https://music.163.com/playlist?id=${model.value.link}`,
+                label: `https://music.163.com/playlist?id=${model.value.link}`
+            },
+            ...list.map((item) => ({
+                id: item.id,
+                count: item.count,
+                value: `https://music.163.com/playlist?id=${item.id}`,
+                label: `https://music.163.com/playlist?id=${item.id}`
+            }))
+        ];
+    } else {
+        return list.map((item) => ({
+            id: item.id,
+            count: item.count,
+            value: `https://music.163.com/playlist?id=${item.id}`,
+            label: `https://music.163.com/playlist?id=${item.id}`
+        }));
+    }
+});
 </script>
