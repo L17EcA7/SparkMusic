@@ -1,7 +1,7 @@
 # SparkMusic | 星火音乐
 
 SparkMusic is an integrated music software.
-On Windows Android Linux
+On Windows Linux MacOS
 
 ## Recommended IDE Setup
 

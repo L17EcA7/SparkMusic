@@ -24,7 +24,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeUnmount } from "vue";
+import { ref, onBeforeUnmount, nextTick } from "vue";
 import {
     useMessage
 } from "naive-ui";
@@ -108,6 +108,7 @@ async function handleValidateButtonClick(e) {
                 const filteredResult = result.filter(songInfo => songInfo !== undefined);
                 console.log(result, successCount, failureCount);
                 mes2.destroy()
+                await nextTick();
                 ap = new APlayer({
                     container: document.getElementById('aplayer_SongList'),
                     theme: "#FFC64B",
@@ -116,7 +117,7 @@ async function handleValidateButtonClick(e) {
                     listMaxHeight: window.innerHeight * 0.7,
                     audio: filteredResult
                 });
-                message.success(`获取成功:${successCount} 首，失败:${failureCount} 首`);
+                message.success(`获取成功`);
                 saveSonglistHistory(id, successCount + failureCount)
                 loading.value = false;
             } catch (error) {

@@ -10,9 +10,12 @@ const handletoken = (text) => {
     const formattedDateTime = `${year}${month}${day}${text}`;
     return formattedDateTime;
 };
-const gettoken = (url, level) => {
-    const rawToken = handletoken(url + level + 'musiccn_v1');
+const gettoken = (id, level) => {
+
+    const rawToken = id + level + 'urlv1';
+    console.log(rawToken);
     const encryptedToken = CryptoJS.MD5(rawToken).toString();
+    console.log(encryptedToken);
     return encryptedToken;
 };
 async function _getMusicInfo(ID) {
@@ -51,7 +54,10 @@ async function getPlaylistInfo(ID) {
     return await _getPlaylistInfo(ID);
 }
 function GetMusicLink(ID) {
-    return `https://api.toubiec.cn/api/wyapi_v1.php?id=${ID}&type=urlv1&level=jymaster&cont=1`;
+    var LEVEL = "jymaster"
+    var TOKEN = gettoken(ID, LEVEL)
+    console.log(`https://api.toubiec.cn/api/wyapi_v1.php?id=${ID}&type=urlv1&level=${LEVEL}&cont=1&token=${TOKEN}`);
+    return `https://api.toubiec.cn/api/wyapi_v1.php?id=${ID}&type=urlv1&level=${LEVEL}&cont=1&token=${TOKEN}`;
 }
 // 示例用法
 
@@ -123,7 +129,7 @@ async function GetAudioList(musicList) {
 
 function extractIdFromUrl(url) {
     try {
-        const urlObject = new URL(url.replace("/#/",'/'));
+        const urlObject = new URL(url.replace("/#/", '/'));
         const params = new URLSearchParams(urlObject.search);
         const id = params.get('id');
 
