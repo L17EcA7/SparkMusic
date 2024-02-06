@@ -1,6 +1,6 @@
 {
-  "name": "spark-music",
-  "version": "0.0.3",
+  "name": "sparkmusic",
+  "version": "0.1.0",
   "description": "SparkMusic is an integrated music software.",
   "main": "./out/main/index.js",
   "author": "7777777",
@@ -62,13 +62,13 @@
     "productName": "SparkMusic",
     "appId": "buzz.litecat.sparkmusic",
     "mac": {
-      "icon": "./build/icons-spark/1024x1024.png"
+      "icon": "./build/icons/1024x1024.png"
     },
     "win": {
       "icon": "./build/icons/icon.ico"
     },
     "linux": {
-      "icon": "./build/icons-spark/1024x1024.png"
+      "icon": "./build/icons/1024x1024.png"
     },
     "nsis": {
       "oneClick": false,
@@ -76,9 +76,9 @@
       "perMachine": true,
       "allowElevation": true,
       "allowToChangeInstallationDirectory": true,
-      "installerIcon": "./build/icons-spark/icon.ico",
-      "uninstallerIcon": "./build/icons-spark/icon.ico",
-      "installerHeaderIcon": "./build/icons-spark/icon.ico",
+      "installerIcon": "./build/icons/icon.ico",
+      "uninstallerIcon": "./build/icons/icon.ico",
+      "installerHeaderIcon": "./build/icons/icon.ico",
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
       "shortcutName": "SparkMusic"
