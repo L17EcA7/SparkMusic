@@ -56,8 +56,9 @@ async function getPlaylistInfo(ID) {
 function GetMusicLink(ID) {
     var LEVEL = "jymaster"
     var TOKEN = gettoken(ID, LEVEL)
-    console.log(`https://api.toubiec.cn/api/wyapi_v1.php?id=${ID}&type=urlv1&level=${LEVEL}&cont=1&token=${TOKEN}`);
-    return `https://api.toubiec.cn/api/wyapi_v1.php?id=${ID}&type=urlv1&level=${LEVEL}&cont=1&token=${TOKEN}`;
+    const now = new Date();
+    console.log(now);
+    return `https://api.toubiec.cn/api/wyapi_v1.php?id=${ID}&type=urlv1&level=${LEVEL}&cont=1&token=${TOKEN}&s=${now}`;
 }
 // 示例用法
 
