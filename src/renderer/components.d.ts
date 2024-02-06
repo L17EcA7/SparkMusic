@@ -18,7 +18,7 @@ declare module 'vue' {
     NEllipsis: typeof import('naive-ui')['NEllipsis']
     NForm: typeof import('naive-ui')['NForm']
     NFormItem: typeof import('naive-ui')['NFormItem']
-    NGradientText: typeof import('naive-ui')['NGradientText']
+    NGradientText: (typeof import('naive-ui'))['NGradientText']
     NH3: typeof import('naive-ui')['NH3']
     NIcon: typeof import('naive-ui')['NIcon']
     NList: typeof import('naive-ui')['NList']

@@ -5,20 +5,12 @@ import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { NaiveUiResolver } from 'unplugin-vue-components/resolvers'
 
-
-
 export default defineConfig({
   main: {
-    plugins: [
-      externalizeDepsPlugin(),
-      bytecodePlugin()
-    ]
+    plugins: [externalizeDepsPlugin(), bytecodePlugin()]
   },
   preload: {
-    plugins: [
-      externalizeDepsPlugin(),
-      bytecodePlugin()
-    ]
+    plugins: [externalizeDepsPlugin(), bytecodePlugin()]
   },
   renderer: {
     resolve: {
@@ -32,12 +24,7 @@ export default defineConfig({
         imports: [
           'vue',
           {
-            'naive-ui': [
-              'useDialog',
-              'useMessage',
-              'useNotification',
-              'useLoadingBar'
-            ]
+            'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar']
           }
         ]
       }),

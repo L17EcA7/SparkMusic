@@ -18,7 +18,7 @@ function createWindow() {
       sandbox: false
     },
     webPreferences: {
-      webSecurity: false,
+      webSecurity: false
     }
   })
 
@@ -55,13 +55,12 @@ app.whenReady().then(() => {
   })
 
   createWindow()
-  app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required');
+  app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
     // dock icon is clicked and there are no other windows open.
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
   })
-  
 })
 
 // Quit when all windows are closed, except on macOS. There, it's common

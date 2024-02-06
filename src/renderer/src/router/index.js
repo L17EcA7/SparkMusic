@@ -1,4 +1,4 @@
-import localForage from "localforage";
+import localForage from 'localforage'
 import { createRouter, createWebHashHistory } from 'vue-router'
 const routes = [
   {
@@ -6,7 +6,7 @@ const routes = [
     name: 'Home',
     meta: {
       keepAlive: true,
-      title: ""
+      title: ''
     },
     component: () => import('../views/home.vue')
   },
@@ -15,7 +15,7 @@ const routes = [
     name: 'Hello',
     meta: {
       keepAlive: true,
-      title: "欢迎"
+      title: '欢迎'
     },
     component: () => import('../views/hi.vue')
   }
@@ -26,8 +26,8 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title ? '星火音乐 | ' + to.meta.title : '星火音乐';
-  next();
-});
+  document.title = to.meta.title ? '星火音乐 | ' + to.meta.title : '星火音乐'
+  next()
+})
 
-export default router;
+export default router
