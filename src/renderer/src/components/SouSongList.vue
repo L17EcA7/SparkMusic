@@ -4,7 +4,7 @@
     <br>
     <n-form ref="formRef" :model="model" :rules="rules">
         <n-form-item path="link" label="网易云歌单链接">
-            <n-auto-complete v-model:value="model.link" size="large" :options="options" placeholder="输入歌单 ID"
+            <n-auto-complete v-model:value="model.link" size="large" :options="options" placeholder="输入歌单URL"
                 :render-label="renderLabel" />
         </n-form-item>
         <n-row :gutter="[0, 24]">
@@ -75,7 +75,7 @@ const rules = {
                 };
 
                 if (!isValidLink(value)) {
-                    return new Error("🎼 请输入有效的网易云音乐歌单链接\n 注意不支持 xxx.xx/#/playlist 格式");
+                    return new Error("🎼 请输入有效的网易云音乐歌单链接");
                 }
 
                 return true;
