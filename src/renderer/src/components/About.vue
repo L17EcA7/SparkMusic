@@ -1,5 +1,5 @@
 <template>
-    <div id="aplayer">
+    <div id="aplayer_About">
 
     </div>
     <n-h3 prefix="bar">
@@ -29,7 +29,7 @@
                 <template #description>
                     <n-space size="small" style="margin-top: 4px">
                         <n-tag :bordered="false" type="info" size="small">
-                            版本 0.0.3 | 测试版
+                            版本 0.1.0
                         </n-tag>
                     </n-space>
                 </template>
@@ -67,7 +67,7 @@
                 烟雨朦胧，情意难平。
             </n-thing>
         </n-list-item>
-        <n-list-item>
+        <!-- <n-list-item>
             <template #prefix>
                 <n-avatar :size="60" src="https://pic.imgdb.cn/item/65abdda8871b83018af7353f.png" />
             </template>
@@ -81,7 +81,7 @@
                 </template>
                 咱叫佐藤創太 = 創太，可以直接叫咱小太
             </n-thing>
-        </n-list-item>
+        </n-list-item> -->
     </n-list>
 </template>
 
@@ -91,7 +91,7 @@ import {
     useMessage
 } from "naive-ui";
 import APlayer from 'aplayer';
-import { extractIdFromUrl, getMusicInfo } from '../js/music';
+import { GetMusicLink, getMusicInfo } from '../js/music';
 var ap = null
 var audio = ref(null)
 const a = onBeforeUnmount(() => {
@@ -99,24 +99,25 @@ const a = onBeforeUnmount(() => {
         ap.destroy()
     }
 })
-async function handleValidateButtonClick(e) {
+async function handle(e) {
     const id = "1354459686";
     const Music = await getMusicInfo(id); // 使用 await 等待异步函数返回结果
     if (ap != null) {
         ap.pause()
     }
     audio.value = {
-        name: Music.song_info.name,
-        artist: Music.song_info.artist,
-        url: Music.url_info.url,
-        cover: Music.song_info.cover,
-        lrc: Music.song_info.lyric
+        name: Music[0].name,
+        artist: Music[0].artist,
+        url: GetMusicLink(id),
+        cover: Music[0].pic,
+        lrc: Music[0].lrc
     }
+    await nextTick(); // Wait for the next DOM update
     ap = new APlayer({
-        container: document.getElementById('aplayer'),
+        container: document.getElementById('aplayer_About'),
         theme: "#FFC64B",
-        lrcType: 1,
+        lrcType: 3,
         audio: [audio.value]
     });
-} handleValidateButtonClick()
+} handle()
 </script>
