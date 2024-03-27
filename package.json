@@ -1,6 +1,6 @@
 {
   "name": "sparkmusic",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "SparkMusic is an integrated music software.",
   "main": "./out/main/index.js",
   "author": "7777777",
@@ -30,6 +30,7 @@
     "less": "^4.2.0",
     "localforage": "^1.10.0",
     "naive-ui": "^2.37.3",
+    "pinia": "^2.1.7",
     "prettier": "^3.2.5",
     "unplugin-auto-import": "^0.17.3",
     "unplugin-vue-components": "^0.26.0",
