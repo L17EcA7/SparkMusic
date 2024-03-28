@@ -1,5 +1,5 @@
 <template>
-    <n-alert title="歌单获取可能会出现无版权歌曲，这些歌曲将被跳过" type="warning">
+    <n-alert :bordered="false" title="歌单获取可能会出现无版权歌曲，这些歌曲将被跳过" type="warning">
     </n-alert>
     <br>
     <n-form ref="formRef" :model="model" :rules="rules">
